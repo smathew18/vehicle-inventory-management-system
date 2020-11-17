@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Vehicle Inventory System</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    </head>
+
+     <style>
+
+         body {
+            background-color: #7abaff;
+        }
+
+    </style>
+    <body>
+
+    <div class="row">
+        <h2 style="padding-left: 15Px">Vehicle Details</h2>
+    </div>
+    <div >
+        <table class="table table-striped table-bordered table-hover" >
+            <thead>
+            <tr class="bg-info">
+                <th>Vehicle Name</th>
+                <th>Vehicle Type</th>
+                <th>Vehicle Price</th>
+                <th>Vehicle Brand</th>
+                <th>Vehicle Model</th>
+                <th>Vehicle Status</th>
+                <th>Inventory Contact</th>
+                <th colspan="2">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for vehicles in vehicles %}
+                <tr>
+                    <td class="nowrap">{{ vehicles.vehicle_name }}</td>
+                    <td class="nowrap">{{ vehicles.vehicle_type }}</td>
+                     <td class="nowrap">{{ vehicles.vehicle_price }}</td>
+                    <td class="nowrap">{{ vehicles.vehicle_brand }}</td>
+                    <td class="nowrap">{{ vehicles.vehicle_model }}</td>
+                    <td class="nowrap">{{ vehicles.vehicle_status }}</td>
+                    <td class="nowrap">{{ vehicles.inventory_admincontact }}</td>
+
+                    <td class="nowrap"><a href="{% url 'vehicle_edit' vehicles.pk %}"
+                           class="btn btn-warning">Edit</a></td>
+                    <td class="nowrap"><a href="{% url 'vehicle_delete' vehicles.pk %}"
+                           onclick="return confirm('Are you sure you want to delete?')"
+                           class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="row" align="center">
+            <a href="{% url 'vehicle_add' %}" class="row"><span
+                    class="btn btn-primary">Add Vehicle</span></a>
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}
